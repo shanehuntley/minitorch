@@ -81,7 +81,6 @@ def exp(x: float) -> float:
 
 def log_back(x: float, d: float) -> float:
     r"If $f = log$ as above, compute $d \times f'(x)$"
-    # TODO: Implement for Task 0.1.
     raise NotImplementedError('Need to implement for Task 0.1')
 
 
@@ -115,15 +114,15 @@ def map(fn: Callable[[float], float]) -> Callable[[Iterable[float]], Iterable[fl
          A function that takes a list, applies `fn` to each element, and returns a
          new list
     """
-    # TODO: Implement for Task 0.3.
-    raise NotImplementedError('Need to implement for Task 0.3')
+    def newfn(ls: Iterable[float]) -> Iterable[float]:
+        for item in ls:
+            yield fn(item)
 
+    return newfn
 
 def negList(ls: Iterable[float]) -> Iterable[float]:
     "Use `map` and `neg` to negate each element in `ls`"
-    # TODO: Implement for Task 0.3.
-    raise NotImplementedError('Need to implement for Task 0.3')
-
+    return map(neg)(ls)
 
 def zipWith(
     fn: Callable[[float, float], float]
@@ -141,15 +140,14 @@ def zipWith(
          applying fn(x, y) on each pair of elements.
 
     """
-    # TODO: Implement for Task 0.3.
-    raise NotImplementedError('Need to implement for Task 0.3')
-
+    def newfn(ls1: Iterable[float], ls2: Iterable[float]) -> Iterable[float]:
+        for x,y in zip(ls1, ls2):
+            yield fn(x,y)
+    return newfn
 
 def addLists(ls1: Iterable[float], ls2: Iterable[float]) -> Iterable[float]:
     "Add the elements of `ls1` and `ls2` using `zipWith` and `add`"
-    # TODO: Implement for Task 0.3.
-    raise NotImplementedError('Need to implement for Task 0.3')
-
+    return zipWith(add)(ls1, ls2)
 
 def reduce(
     fn: Callable[[float, float], float], start: float
@@ -166,17 +164,17 @@ def reduce(
          $x_1 \ldots x_n$ and computes the reduction :math:`fn(x_3, fn(x_2,
          fn(x_1, x_0)))`
     """
-    # TODO: Implement for Task 0.3.
-    raise NotImplementedError('Need to implement for Task 0.3')
-
+    def newfn(ls: Iterable[float]) -> float:
+        rval = start
+        for item in ls:
+            rval = fn(item,rval)
+        return rval
+    return newfn
 
 def sum(ls: Iterable[float]) -> float:
     "Sum up a list using `reduce` and `add`."
-    # TODO: Implement for Task 0.3.
-    raise NotImplementedError('Need to implement for Task 0.3')
-
+    return reduce(add, 0.0)(ls)
 
 def prod(ls: Iterable[float]) -> float:
     "Product of a list using `reduce` and `mul`."
-    # TODO: Implement for Task 0.3.
-    raise NotImplementedError('Need to implement for Task 0.3')
+    return reduce(mul, 1.0)(ls)
