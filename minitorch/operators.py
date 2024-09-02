@@ -63,7 +63,7 @@ def relu(x: float) -> float:
 
     (See https://en.wikipedia.org/wiki/Rectifier_(neural_networks) .)
     """
-    return max(0,x)
+    return max(0.0, x)
 
 
 EPS = 1e-6
